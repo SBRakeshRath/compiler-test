@@ -27,6 +27,6 @@
     # Copy the built JavaScript from the builder stage
     COPY --from=builder /app/dist ./dist
     
-    EXPOSE 3009
+    EXPOSE 8080
     
     CMD [ "npm", "start" ]
