@@ -3,30 +3,43 @@
 
     WORKDIR /app
     
+    # Copy dependency definitions
     COPY package*.json ./
     
-    # Install dependencies (including devDependencies for build)
+    # Install all dependencies (including devDependencies)
     RUN npm install
     
+    # Copy the rest of the source code
     COPY . .
     
-    # Build the TypeScript code
+    # Build the TypeScript project
     RUN npm run build
     
     # --- Stage 2: Production Stage ---
-    FROM node:current-alpine
+    FROM ubuntu:latest
+    
+    # Install Node.js, npm, and curl
+    RUN apt-get update \
+      && apt-get install -y nodejs npm curl \
+      && apt-get clean \
+      && rm -rf /var/lib/apt/lists/*
+    
+    # Download and install the delirium binary
+    RUN curl -L -o /usr/local/bin/delirium "https://storage.googleapis.com/delirium-runner/delirium-1.0.0" \
+      && chmod +x /usr/local/bin/delirium
     
     WORKDIR /app
     
-    # Copy only the package.json and package-lock.json for production dependencies
+    # Copy only package files and install production dependencies
     COPY package*.json ./
-    
-    # Install ONLY production dependencies
     RUN npm install --production
     
-    # Copy the built JavaScript from the builder stage
+    # Copy the compiled output from the builder
     COPY --from=builder /app/dist ./dist
     
+    # Expose app port
     EXPOSE 8080
     
-    CMD [ "npm", "start" ]
+    # Start the app
+    CMD ["npm", "start"]
+    

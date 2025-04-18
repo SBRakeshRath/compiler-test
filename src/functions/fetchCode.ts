@@ -10,7 +10,7 @@ export default async function fetchCode(id: string) {
       throw new Error("Failed to fetch script link");
     }
     // save the file in temp storage
-    const fileName = v4() + ".js";
+    const fileName = v4() + ".del";
     const filePath = os.tmpdir() + "/" + fileName;
 
     const response = await fetch(scriptLink);

@@ -17,7 +17,7 @@ export default async function RunCode(filepath:string) {
   }
 
   const outPutFile = CreateFile(".out");
-  const command = `node ${filepath}`;
+  const command = `delirium ${filepath}`;
 
   try {
     const { stdout, stderr, error } = spawnSync(command, {
