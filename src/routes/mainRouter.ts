@@ -33,7 +33,6 @@ mainRouter.post("/", async (req, res) => {
       throw new Error("Output file not found");
     }
     const uploadFileLink = await UploadFile(runCodeResponse.file);
-    console.log(uploadFileLink)
     if (!uploadFileLink) {
       throw new Error("Upload file link not found");
     }

@@ -27,10 +27,6 @@ export default async function RunCode(filepath:string) {
     });
     //write everything to output file
 
-    console.log("stdout: ", stdout.toString());
-    console.log("stderr: ", stderr.toString());
-    console.log("error: ", error);
-
     fs.writeFileSync(outPutFile, String(stdout), { flag: "w" });
 
     let status = "success";
