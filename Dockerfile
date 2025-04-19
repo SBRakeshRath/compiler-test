@@ -25,7 +25,7 @@
       && rm -rf /var/lib/apt/lists/*
     
     # Download and install the delirium binary
-    RUN curl -L -o /usr/local/bin/delirium "https://storage.googleapis.com/delirium-runner/delirium-1.1.0" \
+    RUN curl -L -o /usr/local/bin/delirium "https://storage.googleapis.com/delirium-runner/delirium-1.1.1" \
       && chmod +x /usr/local/bin/delirium
     
     WORKDIR /app
