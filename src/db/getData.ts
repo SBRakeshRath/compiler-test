@@ -4,9 +4,10 @@ import { getFirestore, Timestamp } from "firebase-admin/firestore";
 config()
 
 const collectionName = process.env.CODE_STATUS_COLLECTION_NAME;
+const databaseName = process.env.CODE_STATUS_DATABASE_NAME;
 
 export async function GetInputFileLink(docID: string) {
-  const db = getFirestore("code-compilation");
+  const db = getFirestore(databaseName);
   const docRef = db.collection(collectionName).doc(docID);
   try {
     const doc = await docRef.get();
@@ -27,7 +28,7 @@ export async function updateStatus(
   codeStatus: string,
   outputFileLink: string
 ) {
-  const db = getFirestore();
+  const db = getFirestore(databaseName);
   const docRef = db.collection(collectionName).doc(docID);
   try {
     await docRef.update({

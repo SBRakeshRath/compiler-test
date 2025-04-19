@@ -6,7 +6,7 @@ const bucketName = process.env.BUCKET_NAME;
 
 export default async function UploadFile(filePath: string) {
   const storage = new Storage();
-  const bucket = storage.bucket(bucketName);
+  const bucket = storage.bucket("delirium-code-compile-stack");
   console.log(filePath)
   try {
     const res = await bucket.upload(filePath);
