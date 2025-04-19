@@ -40,6 +40,11 @@ export default async function RunCode(filepath:string) {
       fs.writeFileSync(outPutFile, String(stderr), { flag: "a" });
     }
 
+    console.log("stdout: ", stdout.toString().trim());
+    console.log("stderr: ", stderr.toString().trim());
+    console.log("error: ", error?.toString().trim());
+
+
     return {
       status: status,
       file: outPutFile,
