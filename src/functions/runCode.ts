@@ -34,6 +34,7 @@ export default async function RunCode(filepath:string) {
     if (error) {
       status = "error";
       fs.writeFileSync(outPutFile, String(error), { flag: "a" });
+      console.log("Error: ", error.toString().trim());
     }
     if (stderr.toString().trim() !== "") {
       status = "error";
